@@ -5,6 +5,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
+import kotlinx.serialization.Serializable
 
 fun Application.configureRouting() {
 
@@ -26,5 +27,17 @@ fun Application.configureRouting() {
             val noteNo = call.parameters["noteId"]
             call.respondText("your note no is $noteNo")
         }
+
+        post("/login") {
+            val userInfo = call.receive<UserInfo>()
+            println(userInfo)
+            call.respondText("this is working")
+        }
     }
 }
+
+@Serializable
+data class UserInfo(
+    val email: String,
+    val password:String
+)
