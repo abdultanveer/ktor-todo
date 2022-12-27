@@ -10,6 +10,10 @@ fun Application.configureRouting() {
 
     routing {
         get("/") {
+            println("Uri is ${call.request.uri}")
+            println("header are ${call.request.headers.names()}")
+            println("header are ${call.request.headers["User-Agent"]}")
+
             call.respondText("Hello todo tcs!")
         }
     }
