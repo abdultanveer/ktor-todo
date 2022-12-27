@@ -11,12 +11,14 @@ fun Application.configureRouting() {
 
     routing {
         get("/") {
-            println("Uri is ${call.request.uri}")
+            val userInfo = UserInfo("email@abc.com","mypassword")
+            call.respond(userInfo)
+           /* println("Uri is ${call.request.uri}")
             println("header are ${call.request.headers.names()}")
             println("header are ${call.request.headers["User-Agent"]}")
             //http://127.0.0.1:8080/?name=abdul&email=androidworkshops@gmail.com
             println("Name is ${call.request.queryParameters["name"]}")
-            println("Email is ${call.request.queryParameters["email"]}")
+            println("Email is ${call.request.queryParameters["email"]}")*/
 
 
             call.respondText("Hello todo tcs!")
