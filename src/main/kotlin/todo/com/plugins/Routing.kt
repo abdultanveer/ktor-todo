@@ -20,5 +20,11 @@ fun Application.configureRouting() {
 
             call.respondText("Hello todo tcs!")
         }
+
+        //http://127.0.0.1:8080/notes/2
+        get("/notes/{noteId}") {
+            val noteNo = call.parameters["noteId"]
+            call.respondText("your note no is $noteNo")
+        }
     }
 }
