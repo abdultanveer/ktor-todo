@@ -6,6 +6,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import kotlinx.serialization.Serializable
+import java.io.File
 
 fun Application.configureRouting() {
 
@@ -38,6 +39,31 @@ fun Application.configureRouting() {
             println(userInfo)
             call.respondText("this is working")
         }
+
+        get ("/download"){
+            val file = File("files/scenary.jpg")
+            call.response.header(
+                HttpHeaders.ContentDisposition,
+                ContentDisposition.Attachment.withParameter(
+                    ContentDisposition.Parameters.FileName,
+                    "ktor-image.jpg"
+                ).toString()
+            )
+            call.respondFile(file)
+        }
+
+        get ("/fileOpen"){
+            val file = File("files/scenary.jpg")
+            call.response.header(
+                HttpHeaders.ContentDisposition,
+                ContentDisposition.Inline.withParameter(
+                    ContentDisposition.Parameters.FileName,
+                    "ktor-image.jpg"
+                ).toString()
+            )
+            call.respondFile(file)
+        }
+
     }
 }
 
